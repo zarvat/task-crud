@@ -1,0 +1,12 @@
+[
+  {
+    "uuid": "3422b448-2460-4fd2-9183-8000de6f8343",
+    "login": "Oleg",
+    "password": "",
+    "name": "Иванов Олег Олегович",
+    "avatar": "src/uploads/img.png",
+    "status": "USER",
+    "age": 18,
+    "sex": "MALE"
+  }
+]
