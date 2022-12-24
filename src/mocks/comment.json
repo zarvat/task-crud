@@ -1,0 +1,26 @@
+[
+  {
+    "uuid": "00000000-2460-4fd2-9183-8000de6f8340",
+    "title": "Привет Олег",
+    "content": "Добро пожаловать",
+    "receiverID": "3422b448-2460-4fd2-9183-8000de6f8343",
+    "authorID": "3422b448-2460-4fd2-9183-8000de6f8344",
+    "timestamp": 1671780847
+  },
+  {
+    "uuid": "00000000-2460-4fd2-9183-8000de6f8341",
+    "title": "Ознакомьтесь с правилами",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a velit mattis, blandit dui ac, luctus massa. Praesent tempor malesuada mi id malesuada. Suspendisse potenti. Aliquam aliquam libero non augue cursus tempor. Donec commodo eros sed dolor consectetur elementum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc a varius neque, eu dapibus sapien. Morbi tempor molestie sapien, eget tempor sem maximus nec. Aenean odio leo, euismod et facilisis quis, aliquam in ipsum. Maecenas tempus velit quis enim commodo facilisis. Nulla hendrerit tortor vitae ipsum pellentesque, eget sollicitudin ligula suscipit. Morbi aliquet risus vel risus luctus, ut pharetra libero aliquet. Cras et dapibus nisl, eu bibendum arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus nec sem eu ante blandit posuere nec id ex.",
+    "receiverID": "3422b448-2460-4fd2-9183-8000de6f8343",
+    "authorID": "3422b448-2460-4fd2-9183-8000de6f8344",
+    "timestamp": 1671798317
+  },
+  {
+    "uuid": "00000000-2460-4fd2-9183-8000de6f8342",
+    "title": "Привет Мария",
+    "content": "Добро пожаловать",
+    "receiverID": "3422b448-2460-4fd2-9183-8000de6f8344",
+    "authorID": "3422b448-2460-4fd2-9183-8000de6f8343",
+    "timestamp": 1671786317
+  }
+]

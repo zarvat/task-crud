@@ -3,10 +3,20 @@
     "uuid": "3422b448-2460-4fd2-9183-8000de6f8343",
     "login": "Oleg",
     "password": "",
-    "name": "Иванов Олег Олегович",
+    "name": "Бескудников Олег Олегович",
     "avatar": "src/uploads/img.png",
     "status": "USER",
     "age": 18,
     "sex": "MALE"
+  },
+  {
+    "uuid": "3422b448-2460-4fd2-9183-8000de6f8344",
+    "login": "Maria",
+    "password": "",
+    "name": "Артемьева Мария Вячеславовна",
+    "avatar": "src/uploads/img.png",
+    "status": "ADMIN",
+    "age": 33,
+    "sex": "FEMALE"
   }
 ]

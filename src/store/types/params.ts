@@ -1,6 +1,16 @@
-export interface Params {
+export interface FilterField {
+  field: string;
+  value: string;
+}
+export interface Pagination {
   offset: number;
   limit: number;
+
+  filter?: FilterField[];
+}
+
+export interface PayloadForCommentsPage extends Pagination {
+  receiverID: string;
 }
 
 export interface IDPayload {

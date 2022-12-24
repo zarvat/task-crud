@@ -1,7 +1,8 @@
-import { UserSex, UserStatus } from '@/types/user';
+import { UserSex, UserStatus } from '@/types/enum';
 
 export const ENTITY_NAMES = {
   USER: 'user',
+  COMMENT: 'comment',
 };
 
 export const USER_SEX = {

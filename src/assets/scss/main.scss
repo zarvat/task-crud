@@ -2,9 +2,17 @@
 
 @import '~bootstrap/scss/bootstrap';
 
+.pure-button {
+  background: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 .text {
 
-  &-username {
+  &-header {
     font-family: 'Roboto', serif;
     font-style: normal;
     font-weight: 500;
@@ -17,6 +25,23 @@
 
     @include media-breakpoint-up(lg) {
       font-size: 16px;
+      line-height: 135%;
+    }
+  }
+
+  &-body {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #181A2B;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+      line-height: 135%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 14px;
       line-height: 135%;
     }
   }
