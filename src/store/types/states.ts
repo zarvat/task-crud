@@ -1,4 +1,5 @@
-import type { UserCommentRedactable, UserCommentView, UserView } from '@/types/view';
+import type { TaskView, UserCommentRedactable, UserCommentView, UserView } from '@/types/view';
+import type { Pagination } from '@/store/types/params';
 
 export interface UserState {
   currentUser: UserView | null;
@@ -16,6 +17,7 @@ export interface RootState {
 }
 
 export interface TaskState {
-  currentTask: UserView | null;
-  currentPage: boolean;
+  currentTask: TaskView | null;
+  currentPage: TaskView[];
+  currentPagination: Pagination;
 }

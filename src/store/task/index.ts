@@ -7,7 +7,12 @@ const namespaced = true;
 
 const state: TaskState = {
   currentTask: null,
-  currentPage: false,
+  currentPage: [],
+  currentPagination: {
+    offset: 0,
+    limit: Infinity,
+    filter: [],
+  },
 };
 
 export const task: Module<TaskState, RootState> = {

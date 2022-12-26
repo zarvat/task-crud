@@ -1,13 +1,18 @@
 import type { GetterTree } from 'vuex';
-import type { UserAPI } from '@/types/api';
-import type { RootState, UserState } from '@/store/types/states';
-export const getters: GetterTree<UserState, RootState> = {
-  getUser(state): UserAPI | null {
-    const { currentUser } = state;
-    return currentUser;
+import type { TaskView } from '@/types/view';
+import type { RootState, TaskState } from '@/store/types/states';
+import type { Pagination } from '@/store/types/params';
+export const getters: GetterTree<TaskState, RootState> = {
+  getTask(state): TaskView | null {
+    const { currentTask } = state;
+    return currentTask;
   },
-  loggedIn(state): boolean {
-    const { loggedIn } = state;
-    return loggedIn;
+  getPage(state): TaskView[] {
+    const { currentPage } = state;
+    return currentPage;
+  },
+  getCurrentPagination(state): Pagination {
+    const { currentPagination } = state;
+    return currentPagination;
   },
 };

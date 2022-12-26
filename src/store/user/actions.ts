@@ -10,13 +10,12 @@ import { login } from '@/api/auth/login';
 export const actions: ActionTree<UserState, RootState> = {
   async getItem({ dispatch, rootGetters, commit }, payload: IDPayload) {
     const { uuid } = payload;
-    const userFromApi = await MockService.readItemFromMock({
+    const data: UserAPI | null = await MockService.readItemFromMock({
       uuid,
       entityName: ENTITY_NAMES.USER,
     }).catch((error) => {
       return Promise.reject(error);
     });
-    const data: UserAPI | null = userFromApi;
 
     if (!data) {
       commit('getItem', null);
