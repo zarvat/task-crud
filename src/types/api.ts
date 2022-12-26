@@ -1,4 +1,4 @@
-import type { UserSex, UserStatus } from '@/types/enum';
+import type { UserSex, UserStatus, TaskMark, TaskPriority } from '@/types/enum';
 
 export interface Entity {
   uuid: string;
@@ -20,4 +20,14 @@ export interface UserCommentAPI extends Entity {
   receiverID: string;
   authorID: string;
   timestamp: number;
+}
+
+export interface TaskAPI extends Entity {
+  title: string;
+  content: string;
+  performerID: string;
+  authorID: string;
+  timestamp: number;
+  mark: TaskMark;
+  priority: TaskPriority;
 }

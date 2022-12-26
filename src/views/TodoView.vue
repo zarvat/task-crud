@@ -24,6 +24,8 @@ const userSex = computed(() =>
 const userAvatar = computed(() => user.value?.avatar || 'Пользователь не найден');
 const userWall = computed(() => user.value?.wall || '_');
 
+store.dispatch('user/getItem', { uuid: '3422b448-2460-4fd2-9183-8000de6f8343' });
+
 const addAvatar = () => {
   return;
 };

@@ -16,3 +16,8 @@ export interface PayloadForCommentsPage extends Pagination {
 export interface IDPayload {
   uuid: string;
 }
+
+export interface LoginPayload {
+  login: string;
+  password: string;
+}

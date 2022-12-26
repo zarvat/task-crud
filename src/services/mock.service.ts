@@ -3,7 +3,6 @@ import * as userMock from '@/mocks/user.json';
 import * as commentMock from '@/mocks/comment.json';
 import type { Entity } from '@/types/api';
 import type { FilterField } from '@/store/types/params';
-import { uuidGenerator } from '@/utils/uuidGenerator';
 interface MockItemGetterParams {
   entityName: string;
   uuid: string;
@@ -18,7 +17,7 @@ interface MockPageGetterParams {
   entityName: string;
   offset: number;
   limit: number;
-  filter: FilterField[];
+  filter?: FilterField[];
 }
 
 const mocks = {

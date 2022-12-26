@@ -2,7 +2,7 @@
   {
     "uuid": "3422b448-2460-4fd2-9183-8000de6f8343",
     "login": "Oleg",
-    "password": "",
+    "password": "48690",
     "name": "Бескудников Олег Олегович",
     "avatar": "src/uploads/img.png",
     "status": "USER",
@@ -12,7 +12,7 @@
   {
     "uuid": "3422b448-2460-4fd2-9183-8000de6f8344",
     "login": "Maria",
-    "password": "",
+    "password": "48690",
     "name": "Артемьева Мария Вячеславовна",
     "avatar": "src/uploads/img.png",
     "status": "ADMIN",

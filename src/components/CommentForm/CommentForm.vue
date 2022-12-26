@@ -39,7 +39,7 @@ const onSubmit = async () => {
   <main>
     <form class="comment-form" @submit.prevent="onSubmit" @reset="onReset">
       <input v-model="titleValue" class="form-input" name="title" />
-      <input v-model="contentValue" class="form-input" name="content" />
+      <input type="text" v-model="contentValue" class="form-input" name="content" />
       <button type="submit">Оставить комментарий</button>
       <button type="reset">Отмена</button>
     </form>
@@ -54,9 +54,11 @@ const onSubmit = async () => {
   width: 100%;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-weight: bolder;
+  gap: 15px;
 
   @include media-breakpoint-down(lg) {
     padding: 18px 20px 18px;
