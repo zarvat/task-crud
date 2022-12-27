@@ -8,6 +8,7 @@ const namespaced = true;
 const state: UserState = {
   currentUser: null,
   loggedIn: false,
+  allUsers: [],
 };
 
 export const user: Module<UserState, RootState> = {

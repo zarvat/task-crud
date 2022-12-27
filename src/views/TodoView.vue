@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
 import { key } from '@/store';
-import CommentForm from '@/components/CommentForm/CommentForm.vue';
+import TaskForm from '@/components/TaskForm/TaskForm.vue';
 import type { Pagination } from '@/store/types/params';
 import AddTaskCard from '@/components/TaskCard/AddTaskCard.vue';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import TaskCard from '@/components/TaskCard/TaskCard.vue';
+import type { TaskView } from '@/types/view';
 const store = useStore(key);
 
-const isEditTask = ref(false);
+const editedTaskID = ref('');
 
 const taskWall = computed(() => store.getters['task/getPage']);
+
+onMounted(async () => {
+  await store.dispatch('user/getAll');
+});
 
 const initialPagination: Pagination = {
   filter: [],
@@ -18,6 +23,21 @@ const initialPagination: Pagination = {
   limit: Infinity,
 };
 store.dispatch('task/setPagination', initialPagination);
+
+const editTaskChange = async (task: TaskView | null) => {
+  if (editedTaskID.value.length) {
+    alert('Закончите редактирование|добавление другой задачи!');
+    return;
+  }
+
+  if (task) {
+    await store.dispatch('task/getItem', { uuid: task.uuid });
+    editedTaskID.value = task.uuid;
+    return;
+  }
+  await store.dispatch('task/resetItem');
+  editedTaskID.value = 'new';
+};
 </script>
 
 <template>
@@ -32,9 +52,22 @@ store.dispatch('task/setPagination', initialPagination);
         <div class="wall__header">Задачи</div>
         <div class="wall__body">
           <div class="wall__body-comment">
-            <task-card v-for="task in taskWall" :key="task.uuid" :task="task"></task-card>
-            <add-task-card @clickAddTask="isEditTask = true" v-if="!isEditTask"></add-task-card>
-            <comment-form @closeForm="isEditTask = false" v-else></comment-form>
+            <template v-for="task in taskWall">
+              <task-form
+                :key="task.uuid"
+                @closeForm="editedTaskID = ''"
+                v-if="editedTaskID === task.uuid"
+              ></task-form>
+              <task-card
+                :key="task.uuid"
+                v-if="editedTaskID !== task.uuid"
+                @edit-task="editTaskChange(task)"
+                @close-form="editedTaskID = ''"
+                :task="task"
+              ></task-card>
+            </template>
+            <task-form @closeForm="editedTaskID = ''" v-if="editedTaskID === 'new'"></task-form>
+            <add-task-card @clickAddTask="editTaskChange(null)" v-else></add-task-card>
           </div>
         </div>
       </div>

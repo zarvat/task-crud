@@ -6,6 +6,7 @@ import type { TaskAPI } from '@/types/api';
 import type { RootState, TaskState } from '@/store/types/states';
 import { getUsersByIDs } from '@/utils/getUsersByIDs';
 import type { TaskView } from '@/types/view';
+import { uuidGenerator } from '@/utils/uuidGenerator';
 
 export const actions: ActionTree<TaskState, RootState> = {
   async getItem({ commit }, payload: IDPayload) {
@@ -16,9 +17,7 @@ export const actions: ActionTree<TaskState, RootState> = {
     }).catch((error) => {
       return Promise.reject(error);
     });
-    if (!data) {
-      commit('getItem', null);
-    }
+    commit('getItem', data);
   },
 
   async getPage({ commit, getters }) {
@@ -57,7 +56,7 @@ export const actions: ActionTree<TaskState, RootState> = {
     commit('getPage', entities);
   },
 
-  async updateItem({ dispatch, getters }, payload: TaskAPI) {
+  async updateItem({ dispatch, getters, rootGetters, commit }, payload: TaskAPI) {
     await MockService.updateItemInMock({
       item: payload,
       entityName: ENTITY_NAMES.TASK,
@@ -66,7 +65,22 @@ export const actions: ActionTree<TaskState, RootState> = {
     });
 
     const pagePayload = getters.getCurrentPagination;
+    const users = rootGetters['user/getAll'];
+    commit('resetItem', users[0]);
+    await dispatch('task/getPage', pagePayload, { root: true });
+  },
 
+  async createItem({ dispatch, getters, rootGetters, commit }, payload: TaskAPI) {
+    await MockService.appendItemToMock<TaskAPI>({
+      item: { ...payload, uuid: uuidGenerator() },
+      entityName: ENTITY_NAMES.TASK,
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
+
+    const pagePayload = getters.getCurrentPagination;
+    const users = rootGetters['user/getAll'];
+    commit('resetItem', users[0]);
     await dispatch('task/getPage', pagePayload, { root: true });
   },
 
@@ -86,5 +100,10 @@ export const actions: ActionTree<TaskState, RootState> = {
     commit('getPagination', payload);
     const pagePayload = getters.getCurrentPagination;
     await dispatch('task/getPage', pagePayload, { root: true });
+  },
+
+  async resetItem({ commit, rootGetters }) {
+    const users = rootGetters['user/getAll'];
+    commit('resetItem', users[0]);
   },
 };

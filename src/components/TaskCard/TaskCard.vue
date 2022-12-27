@@ -7,6 +7,12 @@ import { key } from '@/store';
 
 const store = useStore(key);
 
+const emit = defineEmits(['editTask', 'closeForm']);
+
+const editTask = () => {
+  emit('editTask');
+};
+
 interface Props {
   task: TaskView;
 }
@@ -20,6 +26,7 @@ const mark = computed(() => TASK_MARKS[props.task.mark]);
 
 const deleteTask = async () => {
   await store.dispatch('task/deleteItem', { uuid: props.task.uuid });
+  emit('closeForm');
 };
 </script>
 
@@ -40,7 +47,7 @@ const deleteTask = async () => {
         <div class="task-card__date">Дата: {{ task.date }}</div>
       </div>
       <div class="task-card__buttons">
-        <button class="task-card__buttons-edit">Редактировать</button>
+        <button class="task-card__buttons-edit" @click="editTask">Редактировать</button>
         <button class="task-card__buttons-edit" @click="deleteTask">Удалить</button>
       </div>
     </div>

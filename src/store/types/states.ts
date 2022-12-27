@@ -3,6 +3,7 @@ import type { Pagination } from '@/store/types/params';
 
 export interface UserState {
   currentUser: UserView | null;
+  allUsers: UserView[];
   loggedIn: boolean;
 }
 

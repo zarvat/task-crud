@@ -75,7 +75,7 @@ class MockService {
     if (indexForUpdateItem === -1) {
       throw new Error(`${entityName} с id ${item.uuid} не найден`);
     }
-    mock.push(item);
+    mock[indexForUpdateItem] = item;
 
     return true;
   }

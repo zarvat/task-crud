@@ -43,4 +43,23 @@ export const actions: ActionTree<UserState, RootState> = {
       await dispatch('user/getItem', { uuid: user.uuid }, { root: true });
     }
   },
+
+  async getAll({ commit }) {
+    const data: UserAPI[] = await MockService.readPageFromMock({
+      offset: 0,
+      limit: Infinity,
+      filter: [],
+      entityName: ENTITY_NAMES.USER,
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
+
+    const entities: UserView[] = data.map((user) => {
+      return {
+        ...user,
+        wall: [],
+      };
+    });
+    commit('getAll', entities);
+  },
 };
