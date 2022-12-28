@@ -20,6 +20,11 @@ const router = createRouter({
       name: 'todo',
       component: () => import('../views/TodoView.vue'),
     },
+    {
+      path: '/typescript',
+      name: 'typescript',
+      component: () => import('../views/TypescriptView.vue'),
+    },
   ],
 });
 
