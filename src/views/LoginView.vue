@@ -2,6 +2,7 @@
 import { store } from '@/store';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import NavigationTab from '@/components/NavigationTab/NavigationTab.vue';
 
 const login = ref('');
 const password = ref('');
@@ -18,6 +19,7 @@ const onSubmit = async () => {
 </script>
 
 <template>
+  <navigation-tab></navigation-tab>
   <main>
     <div class="login-container">
       <form class="login-form" @submit.prevent="onSubmit">

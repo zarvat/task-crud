@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-import { TaskView } from '@/types/view';
+import { computed } from 'vue';
+import { TaskView, UserView } from '@/types/view';
 import { store } from '@/store';
 import { TaskMark, TaskPriority } from '@/types/enum';
 import { TASK_MARKS, TASK_PRIORITIES } from '@/constants';
@@ -27,6 +27,10 @@ const priorities = computed(() => {
   });
 });
 
+const users = computed(() => {
+  return store.getters['user/getAll'];
+});
+
 const titleValue = computed<string>({
   get() {
     return task.value.title;
@@ -51,6 +55,30 @@ const markValue = computed<TaskMark>({
   },
   set(value: TaskMark) {
     store.commit('task/getItem', { ...task.value, mark: value });
+  },
+});
+
+const authorValue = computed<string>({
+  get() {
+    return task.value.authorID;
+  },
+  set(value: string) {
+    const user = users.value.find((item: UserView) => item.uuid === value);
+    store.commit('task/getItem', { ...task.value, authorID: user.uuid, authorName: user.name });
+  },
+});
+
+const performerValue = computed<string>({
+  get() {
+    return task.value.performerID;
+  },
+  set(value: string) {
+    const user = users.value.find((item: UserView) => item.uuid === value);
+    store.commit('task/getItem', {
+      ...task.value,
+      performerID: user.uuid,
+      performerName: user.name,
+    });
   },
 });
 
@@ -91,9 +119,8 @@ const onSubmit = async () => {
       </div>
       <div class="comment-form__control">
         <div class="comment-form__control-label">Приоритет</div>
-        {{ priorities }}
         <select v-model="priorityValue" class="form-input" name="content">
-          <option v-for="priority in priorities" :value="priority.value" :key="priority">
+          <option v-for="priority in priorities" :value="priority.value" :key="priority.value">
             {{ priority.label }}
           </option>
         </select>
@@ -101,7 +128,21 @@ const onSubmit = async () => {
       <div class="comment-form__control">
         <div class="comment-form__control-label">Метка</div>
         <select v-model="markValue" class="form-input" name="content">
-          <option v-for="mark in marks" :value="mark.value" :key="mark">{{ mark.label }}</option>
+          <option v-for="mark in marks" :value="mark.value" :key="mark.value">
+            {{ mark.label }}
+          </option>
+        </select>
+      </div>
+      <div class="comment-form__control">
+        <div class="comment-form__control-label">Автор</div>
+        <select v-model="authorValue" class="form-input" name="content">
+          <option v-for="user in users" :value="user.uuid" :key="user.uuid">{{ user.name }}</option>
+        </select>
+      </div>
+      <div class="comment-form__control">
+        <div class="comment-form__control-label">Исполнитель</div>
+        <select v-model="performerValue" class="form-input" name="content">
+          <option v-for="user in users" :value="user.uuid" :key="user.uuid">{{ user.name }}</option>
         </select>
       </div>
       <button type="submit">

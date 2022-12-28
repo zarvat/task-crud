@@ -7,6 +7,7 @@ import { USER_SEX, USER_STATUSES } from '@/constants';
 import type { UserView } from '@/types/view';
 import AddCommentCard from '@/components/CommentCard/AddCommentCard.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
+import NavigationTab from '@/components/NavigationTab/NavigationTab.vue';
 const store = useStore(key);
 
 const isEditComment = ref(false);
@@ -33,6 +34,7 @@ const deleteAvatar = () => {
 </script>
 
 <template>
+  <navigation-tab></navigation-tab>
   <main>
     <header class="header">
       <div class="container-lg container-fluid">

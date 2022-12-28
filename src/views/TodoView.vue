@@ -7,6 +7,7 @@ import AddTaskCard from '@/components/TaskCard/AddTaskCard.vue';
 import { computed, onMounted, ref } from 'vue';
 import TaskCard from '@/components/TaskCard/TaskCard.vue';
 import type { TaskView } from '@/types/view';
+import NavigationTab from '@/components/NavigationTab/NavigationTab.vue';
 const store = useStore(key);
 
 const editedTaskID = ref('');
@@ -41,12 +42,8 @@ const editTaskChange = async (task: TaskView | null) => {
 </script>
 
 <template>
+  <navigation-tab></navigation-tab>
   <main>
-    <header class="header">
-      <div class="container-lg container-fluid">
-        <div class="todo">Стена задач</div>
-      </div>
-    </header>
     <div class="container-lg container-fluid">
       <div class="wall">
         <div class="wall__header">Задачи</div>

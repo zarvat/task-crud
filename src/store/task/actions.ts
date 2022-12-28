@@ -72,7 +72,7 @@ export const actions: ActionTree<TaskState, RootState> = {
 
   async createItem({ dispatch, getters, rootGetters, commit }, payload: TaskAPI) {
     await MockService.appendItemToMock<TaskAPI>({
-      item: { ...payload, uuid: uuidGenerator() },
+      item: { ...payload, timestamp: Date.now(), uuid: uuidGenerator() },
       entityName: ENTITY_NAMES.TASK,
     }).catch((error) => {
       return Promise.reject(error);
@@ -81,7 +81,7 @@ export const actions: ActionTree<TaskState, RootState> = {
     const pagePayload = getters.getCurrentPagination;
     const users = rootGetters['user/getAll'];
     commit('resetItem', users[0]);
-    await dispatch('task/getPage', pagePayload, { root: true });
+    await dispatch('task/getPage', { ...pagePayload }, { root: true });
   },
 
   async deleteItem({ getters, dispatch }, payload: IDPayload) {

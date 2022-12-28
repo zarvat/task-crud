@@ -2,6 +2,7 @@
 import { testPredicate } from '../../typescript-tasks/2_predicate';
 import { testPersonString } from '../../typescript-tasks/1_array';
 import { typescriptTasksLog } from '@/utils/typescriptTasksLog';
+import NavigationTab from '@/components/NavigationTab/NavigationTab.vue';
 
 const runPredicate = () => {
   testPredicate();
@@ -13,6 +14,7 @@ const runArray = () => {
 </script>
 
 <template>
+  <navigation-tab></navigation-tab>
   <main>
     <div class="container-lg container-fluid">
       <div class="buttons">

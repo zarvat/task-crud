@@ -6,7 +6,7 @@
     "performerID": "3422b448-2460-4fd2-9183-8000de6f8343",
     "authorID": "3422b448-2460-4fd2-9183-8000de6f8344",
     "timestamp": 1006788808467,
-    "priority": 0,
+    "priority": "LOW",
     "mark": "BACKEND"
   },
   {
@@ -16,17 +16,17 @@
     "authorID": "3422b448-2460-4fd2-9183-8000de6f8344",
     "performerID": "3422b448-2460-4fd2-9183-8000de6f8344",
     "timestamp": 1722671799917,
-    "priority": 3,
+    "priority": "HIGH",
     "mark": "TEST"
   },
   {
     "uuid": "11111111-2460-4fd2-9183-8000de6f8342",
-    "title": "Привет Мария",
-    "content": "Добро пожаловать",
+    "title": "Тайпскрипт",
+    "content": "Написать функцию, которая принимает массив из объектов { name: string; age: number; }[] и возвращает отсортированную ...",
     "performerID": "3422b448-2460-4fd2-9183-8000de6f8344",
     "authorID": "3422b448-2460-4fd2-9183-8000de6f8343",
     "timestamp": 1887687786317,
-    "priority": 1,
+    "priority": "CRITICAL",
     "mark": "FRONTEND"
   }
 ]
