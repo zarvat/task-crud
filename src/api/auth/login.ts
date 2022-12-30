@@ -27,12 +27,18 @@ const findUserByLogin = async (login: string): Promise<UserAPI | null> => {
   return users[0];
 };
 
-export const login = async (payload: LoginPayload): UserAPI | null => {
+export const login = async (payload: LoginPayload): Promise<UserAPI> => {
   const { login, password } = payload;
 
   const user = await findUserByLogin(login);
   if (!user) {
-    return null;
+    throw new Error('Пользователь не найден');
   }
-  return getHashString(password) === user?.password ? user : null;
+  const isPasswordValid = getHashString(password) === user?.password;
+
+  if (!isPasswordValid) {
+    throw new Error('Неверный пароль');
+  }
+
+  return user;
 };

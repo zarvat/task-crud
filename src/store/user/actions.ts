@@ -31,17 +31,53 @@ export const actions: ActionTree<UserState, RootState> = {
     await dispatch('comment/getPage', commentPayload, { root: true });
     const wall = rootGetters['comment/getPage'];
 
-    const entityName: UserView | null = { ...data, wall: wall };
+    const entity: UserView | null = { ...data, wall: wall };
 
-    commit('getItem', entityName);
+    commit('getItem', entity);
+    return entity;
   },
 
   async login({ commit, dispatch }, payload: LoginPayload) {
-    const user = await login(payload);
+    const user = await new Promise<UserAPI>((resolve, reject) =>
+      setTimeout(async () => {
+        try {
+          const res = await login(payload);
+          resolve(res);
+        } catch (e) {
+          if (e instanceof Error) {
+            alert(e.message);
+            reject(new Error(e.message));
+          }
+          reject(new Error('Ошибка авторризации'));
+        }
+      }, 1000)
+    ).catch((e) => {
+      throw new Error(e);
+    });
     if (user) {
       commit('login');
-      await dispatch('user/getItem', { uuid: user.uuid }, { root: true });
+      //якобы получены надёжный защтщённый токен
+      localStorage.setItem('user_token', `${user.login}:${payload.password}`);
+      await dispatch('getItem', { uuid: user.uuid });
+      return true;
     }
+  },
+
+  logout({ commit }) {
+    localStorage.removeItem('user_token');
+    commit('logout');
+  },
+
+  async checkIfUserLoggedIn({ state, dispatch }) {
+    if (state.loggedIn) {
+      return true;
+    }
+    const token = localStorage.getItem('user_token');
+    if (!token) {
+      return false;
+    }
+    const [login, password] = token.split(':');
+    return await dispatch('login', { login, password });
   },
 
   async getAll({ commit }) {

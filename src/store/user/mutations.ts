@@ -10,6 +10,7 @@ export const mutations: MutationTree<UserState> = {
   },
   logout(state) {
     state.loggedIn = false;
+    state.currentUser = null;
   },
   getAll(state, payload: UserView[]) {
     state.allUsers = payload;

@@ -29,25 +29,36 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = store.getters['user/loggedIn'];
-
   const pagesOnlyForAuthorized = ['/'];
   const loginPage = '/login';
-  if (to.path === loginPage) {
-    if (loggedIn) {
-      return next({ name: 'home' });
-    }
+
+  if (!pagesOnlyForAuthorized.includes(to.path) && to.path !== loginPage) {
     return next();
   }
 
-  if (pagesOnlyForAuthorized.includes(to.path)) {
-    if (loggedIn) {
-      return next();
-    }
-    return next({ name: 'login' });
-  }
+  store
+    .dispatch('user/checkIfUserLoggedIn')
+    .then((loggedIn) => {
+      if (to.path === loginPage) {
+        if (loggedIn) {
+          return next({ name: 'home' });
+        }
+        return next();
+      }
 
-  return next();
+      if (pagesOnlyForAuthorized.includes(to.path)) {
+        if (loggedIn) {
+          return next();
+        }
+        return next({ name: 'login' });
+      }
+
+      return next();
+    })
+    .catch((e) => {
+      return next({ name: 'login' });
+      throw new Error(e);
+    });
 });
 
 export default router;

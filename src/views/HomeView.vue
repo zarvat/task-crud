@@ -8,6 +8,7 @@ import type { UserView } from '@/types/view';
 import AddCommentCard from '@/components/CommentCard/AddCommentCard.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import NavigationTab from '@/components/NavigationTab/NavigationTab.vue';
+import { useRouter } from 'vue-router';
 const store = useStore(key);
 
 const isEditComment = ref(false);
@@ -30,6 +31,12 @@ const addAvatar = () => {
 };
 const deleteAvatar = () => {
   return;
+};
+
+const $router = useRouter();
+const logout = async () => {
+  store.dispatch('user/logout');
+  await $router.push({ name: 'login' });
 };
 </script>
 
@@ -61,6 +68,7 @@ const deleteAvatar = () => {
                 <img class="avatar-icon" src="../assets/icons/trash.svg" alt="avatar" />
               </button>
             </div>
+            <button @click="logout">Выйти из аккаунта</button>
           </div>
         </div>
       </div>
@@ -174,6 +182,7 @@ const deleteAvatar = () => {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 30px;
 
     &-avatar {
       width: 88px;

@@ -6,15 +6,24 @@ import NavigationTab from '@/components/NavigationTab/NavigationTab.vue';
 
 const login = ref('');
 const password = ref('');
+const loading = ref(false);
 
 const $router = useRouter();
 
 const onSubmit = async () => {
-  await store.dispatch('user/login', {
-    login: login.value,
-    password: password.value,
-  });
-  await $router.push({ name: 'home' });
+  loading.value = true;
+  await store
+    .dispatch('user/login', {
+      login: login.value,
+      password: password.value,
+    })
+    .then(async () => {
+      await $router.push({ name: 'home' });
+    })
+    .catch((e) => {
+      throw new Error(e);
+    })
+    .finally(() => (loading.value = false));
 };
 </script>
 
@@ -36,7 +45,7 @@ const onSubmit = async () => {
             autocomplete="on"
           />
         </div>
-        <button type="submit">Войти</button>
+        <button type="submit" :disabled="loading">Войти</button>
       </form>
     </div>
   </main>

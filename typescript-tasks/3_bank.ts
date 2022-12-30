@@ -1,12 +1,10 @@
-import { api } from './bankAPI';
-
 interface EnumCurrency {
   USD: 'cent';
   RUB: 'kopeika';
   EUR: 'eurocent';
 }
 
-interface accountInfo {
+interface AccountInfo {
   uuid: string;
   accountName: string;
   bankName: string;
@@ -17,27 +15,69 @@ interface accountInfo {
   amount: number;
 }
 
-class BankAPIHandler {
-  private authenticated: boolean;
-  private accounts: accountInfo[];
+interface ErrorLine {
+  field: string;
+  message: string;
+}
 
-  async login(username, password): Promise<string> {
-    const token = await api.login(username, password).catch((e) => {
-      throw new Error(e);
-    });
+class CustomError extends Error {
+  constructor(message: string, type: string, errors: ErrorLine[]) {
+    super(message);
+    this.errors = errors;
+    this.type = type;
+    Object.setPrototypeOf(this, CustomError.prototype);
+  }
+  public errors: ErrorLine[];
+  public type: string;
+}
+
+export class BankAPIHandler {
+  private authenticated: boolean;
+  private accounts: AccountInfo[];
+
+  constructor() {
+    this.authenticated = false;
+    this.accounts = [];
+  }
+
+  async login(username: string, password: string): Promise<string> {
+    try {
+      // some Auth code
+    } catch (e) {
+      if (e instanceof CustomError) {
+        if (e.type === 'AuthorizationError') {
+          const errorMessages: string[] = [];
+          for (const errorLine of e.errors) {
+            errorMessages.push(
+              errorLine.field === 'username' ? 'Неверный логин' : 'Неверный пароль'
+            );
+          }
+          throw `Ошибка авторизации: ${errorMessages.join(', ')}`;
+        }
+        throw new Error(e.message);
+      }
+      //some errors handling
+    }
+
     this.authenticated = true;
-    return token;
+    return 'token';
   }
 
   async fetchAccountInfos() {
-    const accountInfos = await api.getAccountInfos().catch((e) => {
-      throw new Error(e);
-    });
-    this.accounts = accountInfos;
+    // some fetching code
   }
 
   async pay(accountId: string, sum: number) {
+    if (!this.accounts.length) {
+      await this.fetchAccountInfos();
+    }
+
     const account = this.accounts.find((item) => item.uuid === accountId);
+
+    if (!account) {
+      throw new Error(`Аккаунт ${accountId} не найден в списке`);
+    }
+
     if (account.amount < sum) {
       throw new Error(
         `Не хватает денег на счёте ${account.accountName}. Необходимо пополнить счёт на ${
@@ -45,10 +85,12 @@ class BankAPIHandler {
         } ${account.currency}`
       );
     }
-    const transaction = await api.fetchTransactions(accountId, sum).catch((e) => {
-      throw new Error(e);
+    const transactionResult = await ((accountId, sum) =>
+      /*some transaction code*/
+      new Promise(() => true))().catch((e) => {
+      throw new Error(e.message);
     });
-    if (transaction.result) {
+    if (transactionResult) {
       account.amount -= sum;
     }
   }
