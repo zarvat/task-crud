@@ -49,21 +49,19 @@ const testPredicate = async (testArray: PredicateWithTimeout[]) => {
   <header class="header d-flex align-items-center justify-content-center">
     <h1 class="container-lg container-fluid">Тестовый интерфейс для TS #1 & #2</h1>
   </header>
-  <main>
-    <div class="container-lg container-fluid">
-      <div class="buttons">
-        <button class="buttons__button" @click="testPersonString(testArrayForSort)">
-          Обработка массива
-        </button>
-        <button class="buttons__button" @click="testPredicate(testArrayForPredicate)">
-          Обработка предиката
-        </button>
-      </div>
-      <div class="textarea__container">
-        <textarea class="textarea" v-model="typescriptTasksLog"></textarea>
-      </div>
+  <div class="container-lg container-fluid">
+    <div class="buttons">
+      <button class="buttons__button" @click="testPersonString(testArrayForSort)">
+        Обработка массива
+      </button>
+      <button class="buttons__button" @click="testPredicate(testArrayForPredicate)">
+        Обработка предиката
+      </button>
     </div>
-  </main>
+    <div class="textarea__container">
+      <textarea class="textarea" v-model="typescriptTasksLog"></textarea>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

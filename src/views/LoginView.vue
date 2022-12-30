@@ -29,26 +29,24 @@ const onSubmit = async () => {
 
 <template>
   <navigation-tab></navigation-tab>
-  <main>
-    <div class="login-container">
-      <form class="login-form" @submit.prevent="onSubmit">
-        <div class="login-form__username">
-          <div class="login-form__username-label">Имя пользователя</div>
-          <input v-model="login" class="login-form__username-input" autocomplete="on" />
-        </div>
-        <div class="login-form__password">
-          <div class="login-form__password-label">Пароль</div>
-          <input
-            v-model="password"
-            class="login-form__password-input"
-            type="password"
-            autocomplete="on"
-          />
-        </div>
-        <button type="submit" :disabled="loading">Войти</button>
-      </form>
-    </div>
-  </main>
+  <div class="login-container">
+    <form class="login-form" @submit.prevent="onSubmit">
+      <div class="login-form__username">
+        <div class="login-form__username-label">Имя пользователя</div>
+        <input v-model="login" class="login-form__username-input" autocomplete="on" />
+      </div>
+      <div class="login-form__password">
+        <div class="login-form__password-label">Пароль</div>
+        <input
+          v-model="password"
+          class="login-form__password-input"
+          type="password"
+          autocomplete="on"
+        />
+      </div>
+      <button type="submit" :disabled="loading">Войти</button>
+    </form>
+  </div>
 </template>
 
 <style scoped lang="scss">

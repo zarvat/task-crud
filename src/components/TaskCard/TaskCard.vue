@@ -31,27 +31,25 @@ const deleteTask = async () => {
 </script>
 
 <template>
-  <main>
-    <div class="task-card">
-      <div class="task-card__header text-header">Имя задачи: {{ task.title }}</div>
-      <div class="task-card__footer">
-        <div class="task-card__author">Приоритет: {{ priority }}</div>
-        <div class="task-card__author">Метка: {{ mark }}</div>
-      </div>
-      <div class="task-card__body text-body">Описание задачи: {{ task.content }}</div>
-      <div class="task-card__footer">
-        <div class="task-card__author">Автор: {{ task.authorName }}</div>
-      </div>
-      <div class="task-card__footer">
-        <div class="task-card__author">Исполнитель: {{ task.performerName }}</div>
-        <div class="task-card__date">Дата: {{ task.date }}</div>
-      </div>
-      <div class="task-card__buttons">
-        <button class="task-card__buttons-edit" @click="editTask">Редактировать</button>
-        <button class="task-card__buttons-edit" @click="deleteTask">Удалить</button>
-      </div>
+  <div class="task-card">
+    <div class="task-card__header text-header">Имя задачи: {{ task.title }}</div>
+    <div class="task-card__footer">
+      <div class="task-card__author">Приоритет: {{ priority }}</div>
+      <div class="task-card__author">Метка: {{ mark }}</div>
     </div>
-  </main>
+    <div class="task-card__body text-body">Описание задачи: {{ task.content }}</div>
+    <div class="task-card__footer">
+      <div class="task-card__author">Автор: {{ task.authorName }}</div>
+    </div>
+    <div class="task-card__footer">
+      <div class="task-card__author">Исполнитель: {{ task.performerName }}</div>
+      <div class="task-card__date">Дата: {{ task.date }}</div>
+    </div>
+    <div class="task-card__buttons">
+      <button class="task-card__buttons-edit" @click="editTask">Редактировать</button>
+      <button class="task-card__buttons-edit" @click="deleteTask">Удалить</button>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

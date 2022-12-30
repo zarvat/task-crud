@@ -7,9 +7,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <main>
-    <button class="comment-card pure-button" @click="onClick">+</button>
-  </main>
+  <button class="comment-card pure-button" @click="onClick">+</button>
 </template>
 
 <style scoped lang="scss">

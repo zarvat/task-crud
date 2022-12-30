@@ -5,7 +5,7 @@ export interface Person {
 
 export const getPersonString = (persons: Person[]): string => {
   const isValidPersonArray = persons.every(
-    (person) => Number.isInteger(person.age) || person.age < 0
+    (person) => Number.isInteger(person.age) && person.age > 0
   );
   if (!isValidPersonArray) {
     throw new Error('В массиве объектов есть элементы с невалидным возрастом');

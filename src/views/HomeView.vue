@@ -42,57 +42,55 @@ const logout = async () => {
 
 <template>
   <navigation-tab></navigation-tab>
-  <main>
-    <header class="header">
-      <div class="container-lg container-fluid">
-        <div class="user">
-          <div class="user__left">
-            <div class="user__left-name text-header">{{ username }}</div>
-            <div class="user__left-fields">
-              <div class="user__left-fields-status">Статус: {{ userStatus }}</div>
-              <div class="user__left-fields-age">Возраст: {{ userAge }}</div>
-              <div class="user__left-fields-sex">Пол: {{ userSex }}</div>
-            </div>
-          </div>
-          <div class="user__right">
-            <div class="user__right-avatar">
-              <img :src="userAvatar" alt="avatar" class="avatar" />
-              <button class="avatar-button avatar-add" @click="addAvatar">
-                <img class="avatar-icon" src="../assets/icons/photo.svg" alt="avatar" />
-              </button>
-              <button
-                class="avatar-button avatar-delete"
-                :class="{ 'd-none': false }"
-                @click="deleteAvatar"
-              >
-                <img class="avatar-icon" src="../assets/icons/trash.svg" alt="avatar" />
-              </button>
-            </div>
-            <button @click="logout">Выйти из аккаунта</button>
+  <header class="header">
+    <div class="container-lg container-fluid">
+      <div class="user">
+        <div class="user__left">
+          <div class="user__left-name text-header">{{ username }}</div>
+          <div class="user__left-fields">
+            <div class="user__left-fields-status">Статус: {{ userStatus }}</div>
+            <div class="user__left-fields-age">Возраст: {{ userAge }}</div>
+            <div class="user__left-fields-sex">Пол: {{ userSex }}</div>
           </div>
         </div>
-      </div>
-    </header>
-    <div class="container-lg container-fluid">
-      <div class="wall">
-        <div class="wall__header">Комментарии</div>
-        <div class="wall__body">
-          <div class="wall__body-comment">
-            <comment-card
-              v-for="comment in userWall"
-              :key="comment.uuid"
-              :comment="comment"
-            ></comment-card>
-            <add-comment-card
-              @clickAddComment="isEditComment = true"
-              v-if="!isEditComment"
-            ></add-comment-card>
-            <comment-form @closeForm="isEditComment = false" v-else></comment-form>
+        <div class="user__right">
+          <div class="user__right-avatar">
+            <img :src="userAvatar" alt="avatar" class="avatar" />
+            <button class="avatar-button avatar-add" @click="addAvatar">
+              <img class="avatar-icon" src="../assets/icons/photo.svg" alt="avatar" />
+            </button>
+            <button
+              class="avatar-button avatar-delete"
+              :class="{ 'd-none': false }"
+              @click="deleteAvatar"
+            >
+              <img class="avatar-icon" src="../assets/icons/trash.svg" alt="avatar" />
+            </button>
           </div>
+          <button @click="logout">Выйти из аккаунта</button>
         </div>
       </div>
     </div>
-  </main>
+  </header>
+  <div class="container-lg container-fluid">
+    <div class="wall">
+      <div class="wall__header">Комментарии</div>
+      <div class="wall__body">
+        <div class="wall__body-comment">
+          <comment-card
+            v-for="comment in userWall"
+            :key="comment.uuid"
+            :comment="comment"
+          ></comment-card>
+          <add-comment-card
+            @clickAddComment="isEditComment = true"
+            v-if="!isEditComment"
+          ></add-comment-card>
+          <comment-form @closeForm="isEditComment = false" v-else></comment-form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

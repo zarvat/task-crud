@@ -11,16 +11,14 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-  <main>
-    <div class="comment-card">
-      <div class="comment-card__header text-header">{{ comment.title }}</div>
-      <div class="comment-card__body text-">{{ comment.content }}</div>
-      <div class="comment-card__footer">
-        <div class="comment-card__author">{{ comment.authorName }}</div>
-        <div class="comment-card__date">{{ comment.date }}</div>
-      </div>
+  <div class="comment-card">
+    <div class="comment-card__header text-header">{{ comment.title }}</div>
+    <div class="comment-card__body text-">{{ comment.content }}</div>
+    <div class="comment-card__footer">
+      <div class="comment-card__author">{{ comment.authorName }}</div>
+      <div class="comment-card__date">{{ comment.date }}</div>
     </div>
-  </main>
+  </div>
 </template>
 
 <style scoped lang="scss">

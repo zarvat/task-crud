@@ -43,33 +43,31 @@ const editTaskChange = async (task: TaskView | null) => {
 
 <template>
   <navigation-tab></navigation-tab>
-  <main>
-    <div class="container-lg container-fluid">
-      <div class="wall">
-        <div class="wall__header">Задачи</div>
-        <div class="wall__body">
-          <div class="wall__body-comment">
-            <template v-for="task in taskWall">
-              <task-form
-                :key="task.uuid"
-                @closeForm="editedTaskID = ''"
-                v-if="editedTaskID === task.uuid"
-              ></task-form>
-              <task-card
-                :key="task.uuid"
-                v-if="editedTaskID !== task.uuid"
-                @edit-task="editTaskChange(task)"
-                @close-form="editedTaskID = ''"
-                :task="task"
-              ></task-card>
-            </template>
-            <task-form @closeForm="editedTaskID = ''" v-if="editedTaskID === 'new'"></task-form>
-            <add-task-card @clickAddTask="editTaskChange(null)" v-else></add-task-card>
-          </div>
+  <div class="container-lg container-fluid">
+    <div class="wall">
+      <div class="wall__header">Задачи</div>
+      <div class="wall__body">
+        <div class="wall__body-comment">
+          <template v-for="task in taskWall">
+            <task-form
+              :key="task.uuid"
+              @closeForm="editedTaskID = ''"
+              v-if="editedTaskID === task.uuid"
+            ></task-form>
+            <task-card
+              :key="task.uuid"
+              v-if="editedTaskID !== task.uuid"
+              @edit-task="editTaskChange(task)"
+              @close-form="editedTaskID = ''"
+              :task="task"
+            ></task-card>
+          </template>
+          <task-form @closeForm="editedTaskID = ''" v-if="editedTaskID === 'new'"></task-form>
+          <add-task-card @clickAddTask="editTaskChange(null)" v-else></add-task-card>
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <style scoped lang="scss">

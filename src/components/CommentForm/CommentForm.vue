@@ -36,14 +36,12 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <main>
-    <form class="comment-form" @submit.prevent="onSubmit" @reset="onReset">
-      <input v-model="titleValue" class="form-input" name="title" />
-      <input type="text" v-model="contentValue" class="form-input" name="content" />
-      <button type="submit">Оставить комментарий</button>
-      <button type="reset">Отмена</button>
-    </form>
-  </main>
+  <form class="comment-form" @submit.prevent="onSubmit" @reset="onReset">
+    <input v-model="titleValue" class="form-input" name="title" />
+    <input type="text" v-model="contentValue" class="form-input" name="content" />
+    <button type="submit">Оставить комментарий</button>
+    <button type="reset">Отмена</button>
+  </form>
 </template>
 
 <style scoped lang="scss">

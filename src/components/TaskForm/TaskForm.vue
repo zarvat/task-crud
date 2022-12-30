@@ -107,51 +107,49 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <main>
-    <form class="comment-form" @submit.prevent="onSubmit" @reset="onReset">
-      <div class="comment-form__control">
-        <div class="comment-form__control-label">Имя задачи</div>
-        <input v-model="titleValue" class="form-input" name="title" />
-      </div>
-      <div class="comment-form__control">
-        <div class="comment-form__control-label">Описание</div>
-        <textarea type="text" v-model="contentValue" class="form-input" name="content" />
-      </div>
-      <div class="comment-form__control">
-        <div class="comment-form__control-label">Приоритет</div>
-        <select v-model="priorityValue" class="form-input" name="content">
-          <option v-for="priority in priorities" :value="priority.value" :key="priority.value">
-            {{ priority.label }}
-          </option>
-        </select>
-      </div>
-      <div class="comment-form__control">
-        <div class="comment-form__control-label">Метка</div>
-        <select v-model="markValue" class="form-input" name="content">
-          <option v-for="mark in marks" :value="mark.value" :key="mark.value">
-            {{ mark.label }}
-          </option>
-        </select>
-      </div>
-      <div class="comment-form__control">
-        <div class="comment-form__control-label">Автор</div>
-        <select v-model="authorValue" class="form-input" name="content">
-          <option v-for="user in users" :value="user.uuid" :key="user.uuid">{{ user.name }}</option>
-        </select>
-      </div>
-      <div class="comment-form__control">
-        <div class="comment-form__control-label">Исполнитель</div>
-        <select v-model="performerValue" class="form-input" name="content">
-          <option v-for="user in users" :value="user.uuid" :key="user.uuid">{{ user.name }}</option>
-        </select>
-      </div>
-      <button type="submit">
-        {{ taskID.length ? 'Редактировать задачу' : 'Создать задачу' }}
-      </button>
-      <button v-if="taskID.length" @click="deleteTask">Удалить задачу</button>
-      <button type="reset">Отмена</button>
-    </form>
-  </main>
+  <form class="comment-form" @submit.prevent="onSubmit" @reset="onReset">
+    <div class="comment-form__control">
+      <div class="comment-form__control-label">Имя задачи</div>
+      <input v-model="titleValue" class="form-input" name="title" />
+    </div>
+    <div class="comment-form__control">
+      <div class="comment-form__control-label">Описание</div>
+      <textarea type="text" v-model="contentValue" class="form-input" name="content" />
+    </div>
+    <div class="comment-form__control">
+      <div class="comment-form__control-label">Приоритет</div>
+      <select v-model="priorityValue" class="form-input" name="content">
+        <option v-for="priority in priorities" :value="priority.value" :key="priority.value">
+          {{ priority.label }}
+        </option>
+      </select>
+    </div>
+    <div class="comment-form__control">
+      <div class="comment-form__control-label">Метка</div>
+      <select v-model="markValue" class="form-input" name="content">
+        <option v-for="mark in marks" :value="mark.value" :key="mark.value">
+          {{ mark.label }}
+        </option>
+      </select>
+    </div>
+    <div class="comment-form__control">
+      <div class="comment-form__control-label">Автор</div>
+      <select v-model="authorValue" class="form-input" name="content">
+        <option v-for="user in users" :value="user.uuid" :key="user.uuid">{{ user.name }}</option>
+      </select>
+    </div>
+    <div class="comment-form__control">
+      <div class="comment-form__control-label">Исполнитель</div>
+      <select v-model="performerValue" class="form-input" name="content">
+        <option v-for="user in users" :value="user.uuid" :key="user.uuid">{{ user.name }}</option>
+      </select>
+    </div>
+    <button type="submit">
+      {{ taskID.length ? 'Редактировать задачу' : 'Создать задачу' }}
+    </button>
+    <button v-if="taskID.length" @click="deleteTask">Удалить задачу</button>
+    <button type="reset">Отмена</button>
+  </form>
 </template>
 
 <style scoped lang="scss">
